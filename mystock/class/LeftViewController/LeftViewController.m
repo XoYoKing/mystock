@@ -7,6 +7,8 @@
 //
 
 #import "LeftViewController.h"
+#import "MainViewController.h"
+#import "SelectionViewController.h"
 
 @interface LeftViewController ()
 
@@ -53,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -75,6 +77,43 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    id centerVC;
+    
+    switch (indexPath.row) {
+        case 0:{
+            centerVC = [[MainViewController alloc] init];
+        }
+            break;
+        case 1:{
+            centerVC = [[SelectionViewController alloc] init];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    [self.drawer replaceCenterViewControllerWithViewController:centerVC];
 }
 
+#pragma mark - ICSDrawerControllerPresenting
+- (void)drawerControllerWillOpen:(ICSDrawerController *)drawerController
+{
+    self.view.userInteractionEnabled = NO;
+}
+
+- (void)drawerControllerDidOpen:(ICSDrawerController *)drawerController
+{
+    self.view.userInteractionEnabled = YES;
+}
+
+- (void)drawerControllerWillClose:(ICSDrawerController *)drawerController
+{
+    self.view.userInteractionEnabled = NO;
+}
+
+- (void)drawerControllerDidClose:(ICSDrawerController *)drawerController
+{
+    self.view.userInteractionEnabled = YES;
+}
 @end

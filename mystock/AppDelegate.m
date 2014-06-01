@@ -15,16 +15,34 @@
 {
     self.leftVC = [[LeftViewController alloc] init];
     self.mainVC = [[MainViewController alloc] init];
+
+    self.dynamicsDrawerViewController = [[MSDynamicsDrawerViewController alloc] init];
+    self.dynamicsDrawerViewController.delegate = self;
     
-    self.icsDrawerC = [[ICSDrawerController alloc] initWithLeftViewController:_leftVC centerViewController:_mainVC];
+    // Add some example stylers
+    [self.dynamicsDrawerViewController addStylersFromArray:@[[MSDynamicsDrawerScaleStyler styler], [MSDynamicsDrawerFadeStyler styler]] forDirection:MSDynamicsDrawerDirectionLeft];
+    [self.dynamicsDrawerViewController addStylersFromArray:@[[MSDynamicsDrawerParallaxStyler styler]] forDirection:MSDynamicsDrawerDirectionRight];
+
+    // 设置左侧
+    [self.dynamicsDrawerViewController setDrawerViewController:_leftVC forDirection:MSDynamicsDrawerDirectionLeft];
+    _leftVC.drawerVC = _dynamicsDrawerViewController;
+    
+    // 设置中间
+    _dynamicsDrawerViewController.paneViewController = [[UINavigationController alloc] initWithRootViewController:_mainVC];
+
+    // 右侧
+//    [self.dynamicsDrawerViewController setDrawerViewController:_selectVC forDirection:MSDynamicsDrawerDirectionRight];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController = _icsDrawerC;
+    self.window.rootViewController = _dynamicsDrawerViewController;
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    // 初始化本地数据库
     hasInitDB = [[PersistenceHelper dataForKey:@"hasInitDB"] boolValue];
 
     if (![[NSFileManager defaultManager] fileExistsAtPath:kDBFilePath]) {
@@ -33,6 +51,10 @@
     }
 
     if (!hasInitDB) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.window animated:YES];
+        hud.labelText = @"初始化中....";
+        [hud hide:YES afterDelay:30];
+        
         NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
         //添加默认参数
         [sendDataDict setValue:@"focus_list" forKey:@"m"];
@@ -54,20 +76,24 @@
             if ([dbBase open]) {
                 for (NSDictionary *item in dataArray) {
                     if ([dbBase executeUpdateWithFormat:sql,[item objForKey:@"code"],[item objForKey:@"name"],[[item objForKey:@"focus"] intValue],[[item objForKey:@"order_num"] intValue]]) {
-                        DMLog(@"success");
+                        hasInitDB = YES;
+                    }else{
+                        hasInitDB = NO;
+                        break;
                     }
                 }
-                
             }
             
             [dbBase close];
             
+            [PersistenceHelper setData:[NSNumber numberWithBool:hasInitDB] forKey:@"hasInitDB"];
+            
+            [MBProgressHUD hideHUDForView:self.window animated:YES];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             DMLog(@"Error: %@", error);
+            [MBProgressHUD hideHUDForView:self.window animated:YES];
         }];
     }
-    
-    
     
     return YES;
 }

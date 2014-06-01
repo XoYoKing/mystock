@@ -37,7 +37,7 @@
 
 //api url
 #ifdef DEBUG_TEST
-#define apiHost             @"http://192.168.1.105/api_call.php?"   //For test Only
+#define apiHost             @"http://192.168.1.107/api_call.php?"   //For test Only
 #else
 #define apiHost             @"http://www.hkebuyer.com/stock/api_call.php?"
 #endif

@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ICSDrawerController.h"
+#import "MSDynamicsDrawerViewController.h"
 
-@interface LeftViewController : UIViewController<ICSDrawerControllerChild,ICSDrawerControllerPresenting,UITableViewDataSource,UITableViewDelegate>
+@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic, weak) ICSDrawerController *drawer;
-
-@property(nonatomic ,strong) UITableView *menuTableView;
+@property (nonatomic ,strong) UITableView *menuTableView;
+@property (nonatomic, weak) MSDynamicsDrawerViewController *drawerVC;
 
 @end

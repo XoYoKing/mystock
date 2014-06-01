@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ICSDrawerController.h"
 #import "LeftViewController.h"
 #import "MainViewController.h"
+#import "MSDynamicsDrawerStyler.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>{
+@interface AppDelegate : UIResponder <UIApplicationDelegate,MSDynamicsDrawerViewControllerDelegate>{
     BOOL hasInitDB;
 }
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) LeftViewController *leftVC;
 @property (nonatomic, strong) MainViewController *mainVC;
-@property (nonatomic, strong) ICSDrawerController *icsDrawerC;
+@property (nonatomic, strong) MSDynamicsDrawerViewController *dynamicsDrawerViewController;
 
 @end

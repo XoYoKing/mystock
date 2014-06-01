@@ -19,4 +19,5 @@
     #import "PersistenceHelper.h"
     #import "FMDB.h"
     #import "ValueForKey.h"
+    #import "MBProgressHUD.h"
 #endif

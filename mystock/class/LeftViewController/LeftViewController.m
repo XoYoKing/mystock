@@ -34,19 +34,16 @@
     _menuTableView.delegate = self;
     _menuTableView.dataSource = self;
     [self.view addSubview:_menuTableView];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    headerView.backgroundColor = [UIColor clearColor];
+    _menuTableView.tableHeaderView = headerView;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Configuring the view’s layout behavior
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -80,6 +77,7 @@
     
     id centerVC;
     
+    
     switch (indexPath.row) {
         case 0:{
             centerVC = [[MainViewController alloc] init];
@@ -93,27 +91,9 @@
             break;
     }
     
-    [self.drawer replaceCenterViewControllerWithViewController:centerVC];
+    [_drawerVC setPaneViewController:centerVC animated:YES completion:^{
+        ;
+    }];
 }
 
-#pragma mark - ICSDrawerControllerPresenting
-- (void)drawerControllerWillOpen:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = NO;
-}
-
-- (void)drawerControllerDidOpen:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = YES;
-}
-
-- (void)drawerControllerWillClose:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = NO;
-}
-
-- (void)drawerControllerDidClose:(ICSDrawerController *)drawerController
-{
-    self.view.userInteractionEnabled = YES;
-}
 @end

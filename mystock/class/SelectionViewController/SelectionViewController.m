@@ -29,6 +29,33 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor blueColor];
+    
+    
+    NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
+    //添加默认参数
+    [sendDataDict setValue:@"focus_list" forKey:@"m"];
+//    [sendDataDict setValue:kClientVersion forKey:@"cver"];
+//    [sendDataDict setValue:kServerVersion forKey:@"version"];
+//    [sendDataDict setValue:kVia forKey:@"via"];
+//    [sendDataDict setValue:kUDID forKey:@"uuid"];
+//    [sendDataDict setValue:kApp forKey:@"app"];
+//    [sendDataDict setValue:kToken forKey:@"token"];
+//    
+//    [sendDataDict setValue:groupNameStr forKey:@"name"];
+//    [sendDataDict setValue:urlStr forKey:@"avatar"];
+//    [sendDataDict setValue:gamePkg forKey:@"pkg"];
+//    [sendDataDict setValue:@"group_1.jpg" forKey:@"background"];
+//    [sendDataDict setValue:gameAppid forKey:@"appid"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DMLog(@"JSON: %@", responseObject);
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DMLog(@"Error: %@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,27 +7,67 @@
 //
 
 #import "AppDelegate.h"
-#import "ICSDrawerController.h"
-#import "LeftViewController.h"
-#import "MainViewController.h"
-#import "SelectionViewController.h"
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    LeftViewController *leftVC = [[LeftViewController alloc] init];
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    SelectionViewController *selectionVC = [[SelectionViewController alloc] init];
+    self.leftVC = [[LeftViewController alloc] init];
+    self.mainVC = [[MainViewController alloc] init];
     
-    ICSDrawerController *icsDrawerC = [[ICSDrawerController alloc] initWithLeftViewController:leftVC centerViewController:selectionVC];
+    self.icsDrawerC = [[ICSDrawerController alloc] initWithLeftViewController:_leftVC centerViewController:_mainVC];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController = icsDrawerC;
+    self.window.rootViewController = _icsDrawerC;
+    
+    hasInitDB = [[PersistenceHelper dataForKey:@"hasInitDB"] boolValue];
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:kDBFilePath]) {
+        NSString *sourcePath = [[NSBundle mainBundle] pathForResource:kDBFileName ofType:@""];
+        [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:kDBFilePath error:nil];
+    }
+
+    if (!hasInitDB) {
+        NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
+        //添加默认参数
+        [sendDataDict setValue:@"focus_list" forKey:@"m"];
+        [sendDataDict setValue:@"0" forKey:@"act"];
+
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            DMLog(@"JSON: %@", responseObject);
+            if (responseObject == nil || [responseObject objForKey:@"result"] == 0) {
+                return;
+            }
+            
+            NSArray *dataArray = [responseObject objForKey:@"data"];
+            
+            FMDatabase *dbBase = [FMDatabase databaseWithPath:kDBFilePath];
+            
+            NSString *sql = @"insert into corp_codes (code,name,focus,order_num) values (%@,%@,%d,%d)";
+            
+            if ([dbBase open]) {
+                for (NSDictionary *item in dataArray) {
+                    if ([dbBase executeUpdateWithFormat:sql,[item objForKey:@"code"],[item objForKey:@"name"],[[item objForKey:@"focus"] intValue],[[item objForKey:@"order_num"] intValue]]) {
+                        DMLog(@"success");
+                    }
+                }
+                
+            }
+            
+            [dbBase close];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            DMLog(@"Error: %@", error);
+        }];
+    }
+    
+    
     
     return YES;
 }

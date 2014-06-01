@@ -11,6 +11,7 @@
 ////*******************************************
 ////调试开关 //For test Only    Release版本一定要关闭本开关，切记切记！！！！！！！！！！！！！！
 #define DEBUG_LOG
+#define DEBUG_TEST
 ////*******************************************//
 ////*******************************************//
 
@@ -35,10 +36,10 @@
 #define VIEW_WIDTH SCREEN_WIDTH
 
 //api url
-#ifdef DEBUG_LEHE
-#define apiHost             @"http://192.168.3.187/stock/api_call.php?"   //For test Only
+#ifdef DEBUG_TEST
+#define apiHost             @"http://192.168.1.105/api_call.php?"   //For test Only
 #else
-#define apiHost             @"http://www.hkebuyer.com/mystock/api_call.php?"
+#define apiHost             @"http://www.hkebuyer.com/stock/api_call.php?"
 #endif
 
 
@@ -48,12 +49,15 @@
 
 #define kDocumentDir                        [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
+#define kDBFileName                         @"stock.db"
+#define kDBFilePath                         [kDocumentDir stringByAppendingPathComponent:kDBFileName]
+
 //判断iOS版本
 #define SYSTEM_VERSION_GREATER_THAN(v)      ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 
 #define kNetworkErrorMessage                @"网络不给力，请稍候重试"
-#define kErrorIcon              @"ico_error_info_2.png"
-#define kSuccessIcon            @"ico_sucess.png"
+
+// ==========================================================================================================
 
 //正在获取位置
 #define kDefaultLocationDesc                @"当前位置"

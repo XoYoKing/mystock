@@ -14,4 +14,9 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "Const.h"
+    #import "AFNetworking.h"
+    #import "UIKit+AFNetworking.h"
+    #import "PersistenceHelper.h"
+    #import "FMDB.h"
+    #import "ValueForKey.h"
 #endif

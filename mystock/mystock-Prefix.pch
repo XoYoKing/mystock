@@ -20,4 +20,5 @@
     #import "FMDB.h"
     #import "ValueForKey.h"
     #import "MBProgressHUD.h"
+    #import "AppDelegate.h"
 #endif

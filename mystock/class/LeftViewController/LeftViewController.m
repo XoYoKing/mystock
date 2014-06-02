@@ -91,7 +91,7 @@
             break;
     }
     
-    [_drawerVC setPaneViewController:centerVC animated:YES completion:^{
+    [_drawerVC setPaneViewController:[[UINavigationController alloc] initWithRootViewController:centerVC] animated:YES completion:^{
         ;
     }];
 }

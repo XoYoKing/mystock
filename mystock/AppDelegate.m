@@ -35,65 +35,16 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = BACKGROUND_COLOR;
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController = _dynamicsDrawerViewController;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    // 初始化本地数据库
-    hasInitDB = [[PersistenceHelper dataForKey:@"hasInitDB"] boolValue];
-
-    if (![[NSFileManager defaultManager] fileExistsAtPath:kDBFilePath]) {
-        NSString *sourcePath = [[NSBundle mainBundle] pathForResource:kDBFileName ofType:@""];
-        [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:kDBFilePath error:nil];
-    }
-
-    if (!hasInitDB) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.window animated:YES];
-        hud.labelText = @"初始化中....";
-        [hud hide:YES afterDelay:30];
-        
-        NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
-        //添加默认参数
-        [sendDataDict setValue:@"focus_list" forKey:@"m"];
-        [sendDataDict setValue:@"0" forKey:@"act"];
-
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            DMLog(@"JSON: %@", responseObject);
-            if (responseObject == nil || [responseObject objForKey:@"result"] == 0) {
-                return;
-            }
-            
-            NSArray *dataArray = [responseObject objForKey:@"data"];
-            
-            FMDatabase *dbBase = [FMDatabase databaseWithPath:kDBFilePath];
-            
-            NSString *sql = @"insert into corp_codes (code,name,focus,order_num) values (%@,%@,%d,%d)";
-            
-            if ([dbBase open]) {
-                for (NSDictionary *item in dataArray) {
-                    if ([dbBase executeUpdateWithFormat:sql,[item objForKey:@"code"],[item objForKey:@"name"],[[item objForKey:@"focus"] intValue],[[item objForKey:@"order_num"] intValue]]) {
-                        hasInitDB = YES;
-                    }else{
-                        hasInitDB = NO;
-                        break;
-                    }
-                }
-            }
-            
-            [dbBase close];
-            
-            [PersistenceHelper setData:[NSNumber numberWithBool:hasInitDB] forKey:@"hasInitDB"];
-            
-            [MBProgressHUD hideHUDForView:self.window animated:YES];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            DMLog(@"Error: %@", error);
-            [MBProgressHUD hideHUDForView:self.window animated:YES];
-        }];
-    }
+    [self initDB];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDrawer) name:kNotificationOpenDrawer object:nil];
     
     return YES;
 }
@@ -125,4 +76,98 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - Custom Method
+- (void)openDrawer{
+    [self.dynamicsDrawerViewController setPaneState:MSDynamicsDrawerPaneStateOpen inDirection:MSDynamicsDrawerDirectionLeft animated:YES allowUserInterruption:YES completion:^{
+        
+    }];
+}
+
+- (void)initDB{
+    // 初始化本地数据库
+    self.sArray = [NSMutableArray array];
+    hasInitDB = [[PersistenceHelper dataForKey:@"hasInitDB"] boolValue];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:kDBFilePath]) {
+        NSString *sourcePath = [[NSBundle mainBundle] pathForResource:kDBFileName ofType:@""];
+        [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:kDBFilePath error:nil];
+    }
+    
+    if (!hasInitDB) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.window animated:YES];
+        hud.labelText = @"初始化中....";
+        [hud hide:YES afterDelay:30];
+        
+        NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
+        //添加默认参数
+        [sendDataDict setValue:@"focus_list" forKey:@"m"];
+        [sendDataDict setValue:@"0" forKey:@"act"];
+        
+        __block AppDelegate *blockSelf = self;
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            DMLog(@"JSON: %@", responseObject);
+            if (responseObject == nil || [responseObject objForKey:@"result"] == 0) {
+                return;
+            }
+            
+            NSArray *dataArray = [responseObject objForKey:@"data"];
+            
+            FMDatabase *dbBase = [FMDatabase databaseWithPath:kDBFilePath];
+            
+            NSString *sql = @"insert into corp_codes (code,name,focus,order_num) values (%@,%@,%d,%d)";
+            
+            if ([dbBase open]) {
+                for (NSDictionary *item in dataArray) {
+                    if ([dbBase executeUpdateWithFormat:sql,[item objForKey:@"code"],[item objForKey:@"name"],[[item objForKey:@"focus"] intValue],[[item objForKey:@"order_num"] intValue]]) {
+                        hasInitDB = YES;
+                    }else{
+                        hasInitDB = NO;
+                        break;
+                    }
+                }
+                
+                
+                sql = @"select * from corp_codes where focus = 1";
+                
+                FMResultSet *result = [dbBase executeQuery:sql];
+                while ([result next]) {
+                    NSDictionary *sDic = @{@"code":[result stringForColumn:@"code"],
+                                           @"name":[result stringForColumn:@"name"],
+                                           @"focus":[NSNumber numberWithInt:[result intForColumn:@"focus"]],
+                                           @"order_num":[NSNumber numberWithInt:[result intForColumn:@"order_num"]]};
+                    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:sDic];
+                    [blockSelf->_sArray addObject:tempDic];
+                }
+                
+            }
+            
+            [dbBase close];
+            
+            [PersistenceHelper setData:[NSNumber numberWithBool:hasInitDB] forKey:@"hasInitDB"];
+            
+            [MBProgressHUD hideHUDForView:self.window animated:YES];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            DMLog(@"Error: %@", error);
+            [MBProgressHUD hideHUDForView:self.window animated:YES];
+        }];
+    }else{
+        FMDatabase *dbBase = [FMDatabase databaseWithPath:kDBFilePath];
+        NSString *sql = @"select * from corp_codes where focus = 1";
+        if ([dbBase open]) {
+            FMResultSet *result = [dbBase executeQuery:sql];
+            while ([result next]) {
+                NSDictionary *sDic = @{@"code":[result stringForColumn:@"code"],
+                                       @"name":[result stringForColumn:@"name"],
+                                       @"focus":[NSNumber numberWithInt:[result intForColumn:@"focus"]],
+                                       @"order_num":[NSNumber numberWithInt:[result intForColumn:@"order_num"]]};
+                NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:sDic];
+                [_sArray addObject:tempDic];
+            }
+        }
+        
+        [dbBase close];
+    }
+}
 @end

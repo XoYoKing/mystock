@@ -1,18 +1,18 @@
 //
-//  MainViewController.m
+//  SearchViewController.m
 //  mystock
 //
-//  Created by Ryan on 14-5-19.
+//  Created by Ryan on 14-6-2.
 //  Copyright (c) 2014年 Ryan. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "SearchViewController.h"
 
-@interface MainViewController ()
+@interface SearchViewController ()
 
 @end
 
-@implementation MainViewController
+@implementation SearchViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,10 +36,10 @@
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = @"推荐列表";
+    titleLabel.text = @"搜索列表";
     self.navigationItem.titleView = titleLabel;
-
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(back_click:)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(back_click:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,8 +48,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 #pragma mark - Custom Method
 - (void)back_click:(id)sender{
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationOpenDrawer object:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 @end

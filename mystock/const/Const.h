@@ -16,7 +16,6 @@
 ////*******************************************//
 
 
-
 #ifdef DEBUG_LOG
 #define DMLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #else
@@ -48,7 +47,6 @@
 #endif
 
 #define kDocumentDir                        [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-
 #define kDBFileName                         @"stock.db"
 #define kDBFilePath                         [kDocumentDir stringByAppendingPathComponent:kDBFileName]
 
@@ -57,6 +55,22 @@
 
 #define kNetworkErrorMessage                @"网络不给力，请稍候重试"
 
+#define HEI_(xx) [UIFont boldSystemFontOfSize:xx]
+
+#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+
+// 基本色值
+#define BACKGROUND_COLOR                    RGBCOLOR(16, 20, 25)
+#define NAVI_COLOR                          RGBCOLOR(29, 34, 39)
+
+#define kAppDelegate \
+(AppDelegate *)[[UIApplication sharedApplication] delegate]
+#define kSArray \
+[(AppDelegate *)[[UIApplication sharedApplication] delegate] sArray]
+
+// 消息通知
+#define kNotificationOpenDrawer             @"open_drawer"
 // ==========================================================================================================
 
 //正在获取位置
@@ -79,11 +93,6 @@
 #define kLeftInterval                       10
 
 
-#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
-
-#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
-
-
 //全局参数宏定义
 //设置参数
 #define kSettingResultsHelper \
@@ -95,7 +104,7 @@
 
 #define KRANDOM(x) (rand()%x)
 
-#define HEI_(xx) [UIFont boldSystemFontOfSize:xx]
+
 
 
 #define PLACEHOLDER_COLOR	RGBCOLOR(150, 150, 150)
@@ -135,9 +144,7 @@ typedef struct
 #define kBaseURL \
 [NSString stringWithFormat:@"%@uuid=%@&via=%@&cver=%@&version=%@&app=%@&pid=%@&sdk=%@&token=%@",apiHost,kUDID,kVia,kClientVersion,kServerVersion,kApp,kPid,kBuildForSDK,kToken]
 
-
 #define kLoginConnectionErrorMessage		@"网络问题，请稍候重试"
-
 
 //上传device token
 #define UPLOAD_DEVICETOKEN(xx_devicetoken) \

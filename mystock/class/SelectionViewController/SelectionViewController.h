@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchViewController.h"
+#import "FMDB.h"
 
-@interface SelectionViewController : UIViewController
+@interface SelectionViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *sTableView;
+@property (nonatomic, strong) NSMutableArray *sArray;
 
 @end

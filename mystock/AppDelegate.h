@@ -20,4 +20,6 @@
 @property (nonatomic, strong) MainViewController *mainVC;
 @property (nonatomic, strong) MSDynamicsDrawerViewController *dynamicsDrawerViewController;
 
+@property (nonatomic, strong) NSMutableArray *sArray;
+
 @end

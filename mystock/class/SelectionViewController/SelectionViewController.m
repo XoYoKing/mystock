@@ -7,6 +7,9 @@
 //
 
 #import "SelectionViewController.h"
+#import "SelectTableViewCell.h"
+
+NSString * const SelectCellReuseIdentifier = @"SelectCell";
 
 @interface SelectionViewController ()
 
@@ -35,7 +38,10 @@
     _sTableView.delegate = self;
     _sTableView.dataSource = self;
     _sTableView.backgroundColor = [UIColor clearColor];
+    _sTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_sTableView];
+    
+    [_sTableView registerClass:[SelectTableViewCell class] forCellReuseIdentifier:SelectCellReuseIdentifier];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     titleLabel.font = HEI_(18);
@@ -99,25 +105,35 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellDefaultIdentifier = @"cellDefault";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellDefaultIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellDefaultIdentifier];
-    }
-    
-    cell.textLabel.text = @"标题";
-    cell.detailTextLabel.text = @"副标题";
+    SelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SelectCellReuseIdentifier forIndexPath:indexPath];
+
+    [cell setCellData:[kSArray objectAtIndex:indexPath.row]];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        /*
+        [dataArray removeObjectAtIndex:indexPath.row];
+        // Delete the row from the data source.
+        [testTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         */
+    }
 }
 
 @end

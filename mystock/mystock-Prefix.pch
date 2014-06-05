@@ -19,6 +19,7 @@
     #import "PersistenceHelper.h"
     #import "FMDB.h"
     #import "ValueForKey.h"
+    #import "NSString+stringValue.h"
     #import "MBProgressHUD.h"
     #import "AppDelegate.h"
 #endif

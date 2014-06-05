@@ -28,8 +28,12 @@
     _leftVC.drawerVC = _dynamicsDrawerViewController;
     
     // 设置中间
-    _dynamicsDrawerViewController.paneViewController = [[UINavigationController alloc] initWithRootViewController:_mainVC];
+//    _dynamicsDrawerViewController.paneViewController = [[UINavigationController alloc] initWithRootViewController:_mainVC];
 
+    
+    self.sVC = [[SelectionViewController alloc] init];
+    _dynamicsDrawerViewController.paneViewController = [[UINavigationController alloc] initWithRootViewController:_sVC];
+    
     // 右侧
 //    [self.dynamicsDrawerViewController setDrawerViewController:_selectVC forDirection:MSDynamicsDrawerDirectionRight];
     
@@ -162,8 +166,8 @@
                                        @"name":[result stringForColumn:@"name"],
                                        @"focus":[NSNumber numberWithInt:[result intForColumn:@"focus"]],
                                        @"order_num":[NSNumber numberWithInt:[result intForColumn:@"order_num"]]};
-                NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:sDic];
-                [_sArray addObject:tempDic];
+               //NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:sDic];
+                [_sArray addObject:sDic];
             }
         }
         

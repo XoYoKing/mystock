@@ -36,7 +36,7 @@
 
 //api url
 #ifdef DEBUG_TEST
-#define apiHost             @"http://192.168.1.107/api_call.php?"   //For test Only
+#define apiHost             @"http://192.168.2.5/api_call.php?"   //For test Only
 #else
 #define apiHost             @"http://www.hkebuyer.com/stock/api_call.php?"
 #endif
@@ -49,6 +49,9 @@
 #define kDocumentDir                        [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define kDBFileName                         @"stock.db"
 #define kDBFilePath                         [kDocumentDir stringByAppendingPathComponent:kDBFileName]
+
+//搜索存储
+#define SEARCH_FILEPATH  [kDocumentDir stringByAppendingPathComponent:@"search_history"]
 
 //判断iOS版本
 #define SYSTEM_VERSION_GREATER_THAN(v)      ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -63,6 +66,7 @@
 // 基本色值
 #define BACKGROUND_COLOR                    RGBCOLOR(16, 20, 25)
 #define NAVI_COLOR                          RGBCOLOR(29, 34, 39)
+#define BLUE_COLOR                          RGBCOLOR(69, 99, 129)
 
 #define kAppDelegate \
 (AppDelegate *)[[UIApplication sharedApplication] delegate]
@@ -71,6 +75,7 @@
 
 // 消息通知
 #define kNotificationOpenDrawer             @"open_drawer"
+#define kNotificationRefreshSelection       @"refresh_selection"
 // ==========================================================================================================
 
 //正在获取位置

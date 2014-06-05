@@ -22,6 +22,8 @@
 		9406954F1929B6FD00BA2694 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9406954E1929B6FD00BA2694 /* LeftViewController.m */; };
 		940695521929B70800BA2694 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 940695511929B70800BA2694 /* MainViewController.m */; };
 		940695551929B71600BA2694 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 940695541929B71600BA2694 /* SelectionViewController.m */; };
+		9430A0BB193F164E00569444 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9430A0BA193F164E00569444 /* SearchViewController.m */; };
+		9430A0BE19405B8600569444 /* NSString+stringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9430A0BD19405B8600569444 /* NSString+stringValue.m */; };
 		94AFA4521939F80B0046F002 /* stock.db in Resources */ = {isa = PBXBuildFile; fileRef = 94AFA4511939F80B0046F002 /* stock.db */; };
 		94AFA456193A10E60046F002 /* PersistenceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFA455193A10E60046F002 /* PersistenceHelper.m */; };
 		94AFA463193A21510046F002 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFA459193A21510046F002 /* FMDatabase.m */; };
@@ -34,7 +36,6 @@
 		94D94CAE193B453900597D59 /* MSDynamicsDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D94CAC193B453900597D59 /* MSDynamicsDrawerViewController.m */; };
 		94DD72CE193AB9A100CFFF1B /* ValueForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DD72CD193AB9A100CFFF1B /* ValueForKey.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		94DD72D2193AE29C00CFFF1B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DD72D1193AE29C00CFFF1B /* MBProgressHUD.m */; };
-		94DFD458193C335400DBD6EC /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DFD457193C335400DBD6EC /* SearchViewController.m */; };
 		94DFD45B193C826F00DBD6EC /* SelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DFD45A193C826F00DBD6EC /* SelectTableViewCell.m */; };
 		94DFD45E193C904F00DBD6EC /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DFD45D193C904F00DBD6EC /* SearchTableViewCell.m */; };
 		94FA366B192A0DEB005C37A1 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FA3647192A0DEB005C37A1 /* AFHTTPRequestOperation.m */; };
@@ -90,6 +91,10 @@
 		940695531929B71600BA2694 /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		940695541929B71600BA2694 /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		9406955E1929B99C00BA2694 /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		9430A0B9193F164E00569444 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		9430A0BA193F164E00569444 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		9430A0BC19405B8600569444 /* NSString+stringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+stringValue.h"; sourceTree = "<group>"; };
+		9430A0BD19405B8600569444 /* NSString+stringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+stringValue.m"; sourceTree = "<group>"; };
 		94AFA4511939F80B0046F002 /* stock.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = stock.db; sourceTree = "<group>"; };
 		94AFA454193A10E60046F002 /* PersistenceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceHelper.h; sourceTree = "<group>"; };
 		94AFA455193A10E60046F002 /* PersistenceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceHelper.m; sourceTree = "<group>"; };
@@ -113,8 +118,6 @@
 		94DD72CD193AB9A100CFFF1B /* ValueForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValueForKey.m; sourceTree = "<group>"; };
 		94DD72D0193AE29C00CFFF1B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		94DD72D1193AE29C00CFFF1B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		94DFD456193C335400DBD6EC /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		94DFD457193C335400DBD6EC /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		94DFD459193C826F00DBD6EC /* SelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTableViewCell.h; sourceTree = "<group>"; };
 		94DFD45A193C826F00DBD6EC /* SelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTableViewCell.m; sourceTree = "<group>"; };
 		94DFD45C193C904F00DBD6EC /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
@@ -310,14 +313,14 @@
 		9406954C1929B68700BA2694 /* SelectionViewController */ = {
 			isa = PBXGroup;
 			children = (
-				940695531929B71600BA2694 /* SelectionViewController.h */,
-				940695541929B71600BA2694 /* SelectionViewController.m */,
-				94DFD456193C335400DBD6EC /* SearchViewController.h */,
-				94DFD457193C335400DBD6EC /* SearchViewController.m */,
 				94DFD459193C826F00DBD6EC /* SelectTableViewCell.h */,
 				94DFD45A193C826F00DBD6EC /* SelectTableViewCell.m */,
+				940695531929B71600BA2694 /* SelectionViewController.h */,
+				940695541929B71600BA2694 /* SelectionViewController.m */,
 				94DFD45C193C904F00DBD6EC /* SearchTableViewCell.h */,
 				94DFD45D193C904F00DBD6EC /* SearchTableViewCell.m */,
+				9430A0B9193F164E00569444 /* SearchViewController.h */,
+				9430A0BA193F164E00569444 /* SearchViewController.m */,
 			);
 			path = SelectionViewController;
 			sourceTree = "<group>";
@@ -371,6 +374,8 @@
 		94DD72CB193AB9A100CFFF1B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				9430A0BC19405B8600569444 /* NSString+stringValue.h */,
+				9430A0BD19405B8600569444 /* NSString+stringValue.m */,
 				94DD72CC193AB9A100CFFF1B /* ValueForKey.h */,
 				94DD72CD193AB9A100CFFF1B /* ValueForKey.m */,
 			);
@@ -494,6 +499,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 9406950919299DFA00BA2694;
 			productRefGroup = 9406951319299DFA00BA2694 /* Products */;
@@ -552,14 +558,15 @@
 				94FA366B192A0DEB005C37A1 /* AFHTTPRequestOperation.m in Sources */,
 				94FA3673192A0DEB005C37A1 /* AFURLSessionManager.m in Sources */,
 				94DFD45E193C904F00DBD6EC /* SearchTableViewCell.m in Sources */,
-				94DFD458193C335400DBD6EC /* SearchViewController.m in Sources */,
 				9406952219299DFA00BA2694 /* main.m in Sources */,
 				94DFD45B193C826F00DBD6EC /* SelectTableViewCell.m in Sources */,
 				94FA366D192A0DEB005C37A1 /* AFHTTPSessionManager.m in Sources */,
 				940695521929B70800BA2694 /* MainViewController.m in Sources */,
+				9430A0BE19405B8600569444 /* NSString+stringValue.m in Sources */,
 				94D94CAE193B453900597D59 /* MSDynamicsDrawerViewController.m in Sources */,
 				94FA367B192A0DEB005C37A1 /* UIWebView+AFNetworking.m in Sources */,
 				94DD72CE193AB9A100CFFF1B /* ValueForKey.m in Sources */,
+				9430A0BB193F164E00569444 /* SearchViewController.m in Sources */,
 				94AFA464193A21510046F002 /* FMDatabaseAdditions.m in Sources */,
 				94AFA467193A21510046F002 /* FMResultSet.m in Sources */,
 				94FA366E192A0DEB005C37A1 /* AFNetworkReachabilityManager.m in Sources */,

@@ -31,6 +31,9 @@
         _codeLabel.text = @"002229";
         [self addSubview:_codeLabel];
         
+        UIView *tempView = [[UIView alloc] initWithFrame:self.bounds];
+        tempView.backgroundColor = NAVI_COLOR;
+        self.selectedBackgroundView = tempView;
     }
     return self;
 }

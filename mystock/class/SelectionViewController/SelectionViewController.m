@@ -54,27 +54,8 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(back_click:)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search_click:)];
-/*
-    NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
-    //添加默认参数
-    [sendDataDict setValue:@"focus_list" forKey:@"m"];
-    [sendDataDict setValue:@"0" forKey:@"act"];
-//    [sendDataDict setValue:kServerVersion forKey:@"version"];
-//    [sendDataDict setValue:kVia forKey:@"via"];
-//    [sendDataDict setValue:kUDID forKey:@"uuid"];
-//    [sendDataDict setValue:kApp forKey:@"app"];
-//    [sendDataDict setValue:kToken forKey:@"token"];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        DMLog(@"JSON: %@", responseObject);
-        
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DMLog(@"Error: %@", error);
-    }];
- */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh_table:) name:kNotificationRefreshSelection object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +74,10 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:searchVC] animated:YES completion:^{
         
     }];
+}
+
+- (void)refresh_table:(NSNotification *)noti{
+    [_sTableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -128,12 +113,53 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        /*
-        [dataArray removeObjectAtIndex:indexPath.row];
-        // Delete the row from the data source.
-        [testTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-         */
+        NSDictionary *tempDic = [kSArray objectAtIndex:indexPath.row];
+        
+        NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
+        //添加默认参数
+        [sendDataDict setValue:@"focus_list" forKey:@"m"];
+        [sendDataDict setValue:@"3" forKey:@"act"];
+        [sendDataDict setValue:[tempDic objForKey:@"code"] forKey:@"code"];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            DMLog(@"JSON: %@", responseObject);
+            if (responseObject == nil || [responseObject objForKey:@"result"] == 0) {
+                return;
+            }
+            
+            FMDatabase *dbBase = [FMDatabase databaseWithPath:kDBFilePath];
+            
+            NSString *sql = @"update corp_codes set focus = '0' WHERE code = %@";
+            if ([dbBase open]) {
+                if ([dbBase executeUpdateWithFormat:sql,[tempDic objForKey:@"code"]]) {
+                    [kSArray removeObjectAtIndex:indexPath.row];
+                    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    
+                    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+                    [self.view addSubview:hud];
+                    
+                    // Set custom view mode
+                    hud.mode = MBProgressHUDModeCustomView;
+                    hud.userInteractionEnabled = NO;
+                    hud.labelText = @"删除成功";
+                    
+                    [hud show:YES];
+                    [hud hide:YES afterDelay:1];
+                }
+            }
+            
+            [dbBase close];
+
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            DMLog(@"Error: %@", error);
+        }];
+
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
 }
 
 @end

@@ -133,8 +133,22 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
             NSString *sql = @"update corp_codes set focus = '0' WHERE code = %@";
             if ([dbBase open]) {
                 if ([dbBase executeUpdateWithFormat:sql,[tempDic objForKey:@"code"]]) {
+                    // 从自选中删除
                     [kSArray removeObjectAtIndex:indexPath.row];
                     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    
+                    // 更换搜索历史中标签
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:SEARCH_FILEPATH]) {
+                        NSMutableArray *historyArray = [NSMutableArray arrayWithContentsOfFile:SEARCH_FILEPATH];
+                        for (NSDictionary *item in historyArray) {
+                            if ([[item objForKey:@"code"] isEqualToString:[tempDic objForKey:@"code"]]) {
+                                [item setValue:[NSNumber numberWithInt:0] forKey:@"focus"];
+                                break;
+                            }
+                        }
+                        
+                        [historyArray writeToFile:SEARCH_FILEPATH atomically:YES];
+                    }
                     
                     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
                     [self.view addSubview:hud];
@@ -161,5 +175,7 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return @"删除";
 }
+
+
 
 @end

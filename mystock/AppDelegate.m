@@ -50,6 +50,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDrawer) name:kNotificationOpenDrawer object:nil];
     
+    //启动远程推送
+    UIRemoteNotificationType type = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound;
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:type];
+    
     return YES;
 }
 
@@ -79,6 +83,45 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+#pragma mark - Remote Notification
+// 请求远程通知回调
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString * tokenAsString = [[[deviceToken description]
+                                 stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+                                stringByReplacingOccurrencesOfString:@" " withString:@""];
+    DMLog(@"token : %@", tokenAsString);
+    
+    NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
+    //添加默认参数
+    [sendDataDict setValue:@"device_token" forKey:@"m"];
+    [sendDataDict setValue:tokenAsString forKey:@"token"];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        DMLog(@"JSON: %@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DMLog(@"Error: %@", error);
+    }];
+    
+}
+
+// Provide a user explanation for when the registration fails
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    DMLog(@"!!!!!!!Error in registration. Error: %@", error);
+}
+
+#pragma mark - 程序收到远程推送消息 Remote notification
+// Handle an actual notification收到某一个消息
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+	DMLog(@"%@", userInfo);
+
+}
+
 
 #pragma mark - Custom Method
 - (void)openDrawer{

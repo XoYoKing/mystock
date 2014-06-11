@@ -11,8 +11,6 @@
 #import "MainViewController.h"
 #import "MSDynamicsDrawerStyler.h"
 
-#import "SelectionViewController.h"
-
 @interface AppDelegate : UIResponder <UIApplicationDelegate,MSDynamicsDrawerViewControllerDelegate>{
     BOOL hasInitDB;
 }
@@ -21,9 +19,6 @@
 @property (nonatomic, strong) LeftViewController *leftVC;
 @property (nonatomic, strong) MainViewController *mainVC;
 @property (nonatomic, strong) MSDynamicsDrawerViewController *dynamicsDrawerViewController;
-
-
-@property (nonatomic, strong) SelectionViewController *sVC;
 
 @property (nonatomic, strong) NSMutableArray *sArray;
 

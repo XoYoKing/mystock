@@ -28,11 +28,7 @@
     _leftVC.drawerVC = _dynamicsDrawerViewController;
     
     // 设置中间
-//    _dynamicsDrawerViewController.paneViewController = [[UINavigationController alloc] initWithRootViewController:_mainVC];
-
-    
-    self.sVC = [[SelectionViewController alloc] init];
-    _dynamicsDrawerViewController.paneViewController = [[UINavigationController alloc] initWithRootViewController:_sVC];
+    _dynamicsDrawerViewController.paneViewController = [[UINavigationController alloc] initWithRootViewController:_mainVC];
     
     // 右侧
 //    [self.dynamicsDrawerViewController setDrawerViewController:_selectVC forDirection:MSDynamicsDrawerDirectionRight];

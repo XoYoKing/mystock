@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SearchTableViewCell.h"
 
-@interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,SearchTableViewCellDelegate>
+@interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,SearchTableViewCellDelegate>{
+    BOOL isADD;
+}
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UITableView *sTableView;

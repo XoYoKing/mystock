@@ -30,6 +30,7 @@ static NSString *searchCellIdentifier = @"searchCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    isADD = NO;
     self.view.backgroundColor = BACKGROUND_COLOR;
     self.navigationController.navigationBar.barTintColor = NAVI_COLOR;
     
@@ -159,6 +160,12 @@ static NSString *searchCellIdentifier = @"searchCell";
 
 #pragma mark - SearchTableViewCellDelegate
 - (void)add_click:(NSDictionary *)dic{
+    if (isADD) {
+        return;
+    }
+    
+    isADD = YES;
+    
     NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     
     NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
@@ -166,6 +173,9 @@ static NSString *searchCellIdentifier = @"searchCell";
     [sendDataDict setValue:@"focus_list" forKey:@"m"];
     [sendDataDict setValue:@"1" forKey:@"act"];
     [sendDataDict setValue:[tempDic objForKey:@"code"] forKey:@"code"];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud show:YES];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:apiHost parameters:sendDataDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -204,6 +214,8 @@ static NSString *searchCellIdentifier = @"searchCell";
                 [self requestData];
                 [_sTableView reloadData];
                 
+                [MBProgressHUD hideHUDForView:self.view animated:NO];
+                
                 MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
                 [self.view addSubview:hud];
                 
@@ -219,8 +231,11 @@ static NSString *searchCellIdentifier = @"searchCell";
         
         [dbBase close];
         
+        isADD = NO;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        isADD = NO;
         DMLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
     }];
     
 }

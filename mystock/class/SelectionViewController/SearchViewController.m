@@ -32,13 +32,12 @@ static NSString *searchCellIdentifier = @"searchCell";
     
     isADD = NO;
     self.view.backgroundColor = BACKGROUND_COLOR;
-    self.navigationController.navigationBar.barTintColor = NAVI_COLOR;
     
     [self initHistoryArray];
     
     self.dataArray = [NSMutableArray arrayWithArray:_historyArray];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     titleLabel.font = HEI_(18);
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -47,6 +46,7 @@ static NSString *searchCellIdentifier = @"searchCell";
     self.navigationItem.titleView = titleLabel;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(back_click:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(back_click:)];
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, 320, 44)];
     _searchBar.backgroundColor = NAVI_COLOR;

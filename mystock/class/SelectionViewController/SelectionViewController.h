@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchViewController.h"
+#import "StockBriefViewController.h"
 #import "FMDB.h"
 
 @interface SelectionViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *sTableView;
 @property (nonatomic, strong) NSMutableArray *sArray;
+
+@property (nonatomic, strong) StockBriefViewController *stockBriefVC;
 
 @end

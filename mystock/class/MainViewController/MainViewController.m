@@ -33,7 +33,7 @@
     self.view.backgroundColor = BACKGROUND_COLOR;
     self.navigationController.navigationBar.barTintColor = NAVI_COLOR;
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     titleLabel.font = HEI_(18);
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;

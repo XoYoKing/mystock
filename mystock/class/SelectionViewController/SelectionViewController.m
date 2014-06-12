@@ -43,7 +43,7 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
     
     [_sTableView registerClass:[SelectTableViewCell class] forCellReuseIdentifier:SelectCellReuseIdentifier];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, 44)];
     titleLabel.font = HEI_(18);
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -104,6 +104,9 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    self.stockBriefVC = [[StockBriefViewController alloc] initWithStock:[kSArray objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:_stockBriefVC animated:YES];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{

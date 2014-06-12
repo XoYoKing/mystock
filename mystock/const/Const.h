@@ -69,7 +69,7 @@
 #define BLUE_COLOR                          RGBCOLOR(69, 99, 129)
 
 #define kAppDelegate \
-(AppDelegate *)[[UIApplication sharedApplication] delegate]
+((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define kSArray \
 [(AppDelegate *)[[UIApplication sharedApplication] delegate] sArray]
 

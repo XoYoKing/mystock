@@ -10,4 +10,12 @@
 
 @interface StockBriefViewController : UIViewController
 
+@property (nonatomic, strong) NSDictionary *stockDic;
+@property (nonatomic, strong) NSArray *downArray;
+
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
+@property (nonatomic, strong) UIImageView *imageView;
+
+- (id)initWithStock:(NSDictionary *)dic;
+
 @end

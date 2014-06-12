@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchTableViewCell.h"
+#import "StockBriefViewController.h"
 
 @interface SearchViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,SearchTableViewCellDelegate>{
     BOOL isADD;
@@ -18,5 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
 @property (nonatomic, strong) NSMutableArray *historyArray;
+
+@property (nonatomic, strong) StockBriefViewController *stockBriefVC;
 
 @end

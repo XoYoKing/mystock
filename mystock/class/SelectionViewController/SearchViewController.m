@@ -32,6 +32,7 @@ static NSString *searchCellIdentifier = @"searchCell";
     
     isADD = NO;
     self.view.backgroundColor = BACKGROUND_COLOR;
+    self.navigationController.navigationBar.barTintColor = NAVI_COLOR;
     
     [self initHistoryArray];
     
@@ -46,7 +47,6 @@ static NSString *searchCellIdentifier = @"searchCell";
     self.navigationItem.titleView = titleLabel;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(back_click:)];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(back_click:)];
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 64, 320, 44)];
     _searchBar.backgroundColor = NAVI_COLOR;
@@ -142,6 +142,9 @@ static NSString *searchCellIdentifier = @"searchCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    self.stockBriefVC = [[StockBriefViewController alloc] initWithStock:[_dataArray objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:_stockBriefVC animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

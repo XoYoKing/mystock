@@ -69,7 +69,7 @@
     
     self.downArray = @[minDownStr,dailyDownStr,weeklyDownStr,monthlyDownStr];
     
-    self.segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 240, 25)];
+    self.segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 240, 30)];
     [_segmentedControl insertSegmentWithTitle:@"分时" atIndex:0 animated:NO];
     [_segmentedControl insertSegmentWithTitle:@"日线" atIndex:1 animated:NO];
     [_segmentedControl insertSegmentWithTitle:@"周线" atIndex:2 animated:NO];
@@ -86,7 +86,7 @@
     [self.view addSubview:imageBackBtn];
     imageBackBtn.center = self.view.center;
     
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 267.5, 150)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300, 170)];
     _imageView.center = self.view.center;
     _imageView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_imageView];
@@ -102,6 +102,7 @@
         
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,7 +114,7 @@
 #pragma mark - Custom Method
 - (void)select_type:(id)sender{
     UISegmentedControl *item = (UISegmentedControl *)sender;
-    int sIndex = item.selectedSegmentIndex;
+    int sIndex = (int)item.selectedSegmentIndex;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -131,7 +132,28 @@
 }
 
 - (void)pic_click:(id)sender{
+    self.stockLineView = [[StockLineView alloc] initWithFrame:self.view.bounds displayImage:_imageView.image];
+    _stockLineView.alpha = 0;
+    [kAppDelegate.window addSubview:_stockLineView];
+    [UIView animateWithDuration:0.3 animations:^{
+        _stockLineView.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close_line_view)];
+    [_stockLineView addGestureRecognizer:tapGesture];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
+- (void)close_line_view{
+    [UIView animateWithDuration:0.3 animations:^{
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        _stockLineView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [_stockLineView removeFromSuperview];
+        self.stockLineView = nil;
+        
+    }];
+}
 @end

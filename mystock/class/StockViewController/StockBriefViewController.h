@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StockLineView.h"
 
 @interface StockBriefViewController : UIViewController
 
@@ -15,6 +16,8 @@
 
 @property (nonatomic, strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIImageView *imageView;
+
+@property (nonatomic, strong) StockLineView *stockLineView;
 
 - (id)initWithStock:(NSDictionary *)dic;
 

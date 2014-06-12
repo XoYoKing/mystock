@@ -67,7 +67,22 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellDefaultIdentifier];
     }
     
-    cell.textLabel.text = @"测试";
+    switch (indexPath.row) {
+        case 0:{
+            cell.textLabel.text = @"推荐";
+        }
+            break;
+        case 1:{
+            cell.textLabel.text = @"自选股";
+        }
+            break;
+        case 2:{
+            cell.textLabel.text = @"设置";
+        }
+            break;
+        default:
+            break;
+    }
 
     return cell;
 }

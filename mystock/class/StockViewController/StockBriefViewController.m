@@ -91,6 +91,7 @@
     _imageView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_imageView];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *downStr = [_downArray objectAtIndex:0];
     NSURL *url=[NSURL URLWithString:downStr];
     NSURLRequest *request=[NSURLRequest requestWithURL:url];
@@ -117,7 +118,6 @@
     int sIndex = (int)item.selectedSegmentIndex;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     NSString *downStr = [_downArray objectAtIndex:sIndex];
     NSURL *url=[NSURL URLWithString:downStr];
     NSURLRequest *request=[NSURLRequest requestWithURL:url];

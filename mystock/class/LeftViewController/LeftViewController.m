@@ -106,8 +106,10 @@
             break;
     }
     
-    [_drawerVC setPaneViewController:[[UINavigationController alloc] initWithRootViewController:centerVC] animated:YES completion:^{
-        ;
+    [_drawerVC setPaneViewController:[[UINavigationController alloc] initWithRootViewController:centerVC] animated:NO completion:^{
+        [_drawerVC setPaneState:MSDynamicsDrawerPaneStateClosed animated:YES allowUserInterruption:YES completion:^{
+            
+        }];
     }];
 }
 

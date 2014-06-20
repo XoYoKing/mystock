@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *suggestArray;
+@property (nonatomic, strong) NSString *dateStr;
+
+@property (nonatomic, strong) UIView *dateView;
+@property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) UIToolbar *toolBar;
+
+@property (nonatomic, strong) UITableView *sTableView;
 
 @end

@@ -24,6 +24,8 @@
 		940695551929B71600BA2694 /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 940695541929B71600BA2694 /* SelectionViewController.m */; };
 		9424749F19480FE700DA27CB /* SuggestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9424749E19480FE700DA27CB /* SuggestDetailViewController.m */; };
 		942474A21948101E00DA27CB /* StockBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942474A11948101E00DA27CB /* StockBriefViewController.m */; };
+		942C0CA91953EC4700108A75 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 942C0CA81953EC4700108A75 /* SettingViewController.m */; };
+		942C0CAC19541D1D00108A75 /* SuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 942C0CAB19541D1D00108A75 /* SuggestTableViewCell.m */; };
 		9430A0BB193F164E00569444 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9430A0BA193F164E00569444 /* SearchViewController.m */; };
 		9430A0BE19405B8600569444 /* NSString+stringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9430A0BD19405B8600569444 /* NSString+stringValue.m */; };
 		94AFA4521939F80B0046F002 /* stock.db in Resources */ = {isa = PBXBuildFile; fileRef = 94AFA4511939F80B0046F002 /* stock.db */; };
@@ -98,6 +100,10 @@
 		9424749E19480FE700DA27CB /* SuggestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestDetailViewController.m; sourceTree = "<group>"; };
 		942474A01948101E00DA27CB /* StockBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StockBriefViewController.h; sourceTree = "<group>"; };
 		942474A11948101E00DA27CB /* StockBriefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockBriefViewController.m; sourceTree = "<group>"; };
+		942C0CA71953EC4700108A75 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		942C0CA81953EC4700108A75 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		942C0CAA19541D1D00108A75 /* SuggestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestTableViewCell.h; sourceTree = "<group>"; };
+		942C0CAB19541D1D00108A75 /* SuggestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuggestTableViewCell.m; sourceTree = "<group>"; };
 		9430A0B9193F164E00569444 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		9430A0BA193F164E00569444 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		9430A0BC19405B8600569444 /* NSString+stringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+stringValue.h"; sourceTree = "<group>"; };
@@ -273,9 +279,10 @@
 		940695441929A26800BA2694 /* class */ = {
 			isa = PBXGroup;
 			children = (
-				9424749C19480F9100DA27CB /* StockViewController */,
 				94DD72CB193AB9A100CFFF1B /* Utility */,
 				94AFA453193A10E60046F002 /* Helper */,
+				942C0CA61953EC3500108A75 /* SettingViewController */,
+				9424749C19480F9100DA27CB /* StockViewController */,
 				9406954A1929B68700BA2694 /* LeftViewController */,
 				9406954B1929B68700BA2694 /* MainViewController */,
 				9406954C1929B68700BA2694 /* SelectionViewController */,
@@ -316,6 +323,8 @@
 			children = (
 				940695501929B70800BA2694 /* MainViewController.h */,
 				940695511929B70800BA2694 /* MainViewController.m */,
+				942C0CAA19541D1D00108A75 /* SuggestTableViewCell.h */,
+				942C0CAB19541D1D00108A75 /* SuggestTableViewCell.m */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -354,6 +363,15 @@
 				94FE50E519498F6000CCE18A /* StockLineView.m */,
 			);
 			path = StockViewController;
+			sourceTree = "<group>";
+		};
+		942C0CA61953EC3500108A75 /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				942C0CA71953EC4700108A75 /* SettingViewController.h */,
+				942C0CA81953EC4700108A75 /* SettingViewController.m */,
+			);
+			path = SettingViewController;
 			sourceTree = "<group>";
 		};
 		94AFA453193A10E60046F002 /* Helper */ = {
@@ -563,6 +581,7 @@
 			files = (
 				94FA367A192A0DEB005C37A1 /* UIRefreshControl+AFNetworking.m in Sources */,
 				94FA3670192A0DEB005C37A1 /* AFURLConnectionOperation.m in Sources */,
+				942C0CAC19541D1D00108A75 /* SuggestTableViewCell.m in Sources */,
 				940695551929B71600BA2694 /* SelectionViewController.m in Sources */,
 				94FA3679192A0DEB005C37A1 /* UIProgressView+AFNetworking.m in Sources */,
 				94AFA456193A10E60046F002 /* PersistenceHelper.m in Sources */,
@@ -600,6 +619,7 @@
 				94FA3678192A0DEB005C37A1 /* UIImageView+AFNetworking.m in Sources */,
 				94FA366C192A0DEB005C37A1 /* AFHTTPRequestOperationManager.m in Sources */,
 				94AFA466193A21510046F002 /* FMDatabaseQueue.m in Sources */,
+				942C0CA91953EC4700108A75 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 ////*******************************************
 ////调试开关 //For test Only    Release版本一定要关闭本开关，切记切记！！！！！！！！！！！！！！
 #define DEBUG_LOG
-//#define DEBUG_TEST
+#define DEBUG_TEST
 ////*******************************************//
 ////*******************************************//
 
@@ -67,6 +67,9 @@
 #define BACKGROUND_COLOR                    RGBCOLOR(16, 20, 25)
 #define NAVI_COLOR                          RGBCOLOR(29, 34, 39)
 #define BLUE_COLOR                          RGBCOLOR(69, 99, 129)
+#define TITLE_BLUE_COLOR                    RGBCOLOR(22, 119, 236)
+#define RED_COLOR                           RGBCOLOR(166, 51, 20)  //大红
+#define DARK_GREEN_COLOR                    RGBCOLOR(40, 115, 40)  //深绿
 
 #define kAppDelegate \
 ((AppDelegate *)[[UIApplication sharedApplication] delegate])

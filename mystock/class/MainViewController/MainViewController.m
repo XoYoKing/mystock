@@ -78,6 +78,9 @@ NSString * const SuggestCellReuseIdentifier = @"SuggestCell";
 }
 
 - (void)open_datePicker:(id)sender{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"qqstock://"]];
+    
+    return;
     [UIView animateWithDuration:0.3 animations:^{
         _dateView.frame = CGRectMake(0, SCREEN_HEIGHT-260, 320, 260);
     }];

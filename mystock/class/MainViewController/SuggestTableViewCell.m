@@ -32,10 +32,10 @@
         _codeLabel.text = @"002229";
         [self addSubview:_codeLabel];
         
-        self.closeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 12, 80, 20)];
+        self.closeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 5, 80, 34)];
         _closeLabel.textAlignment = NSTextAlignmentRight;
         _closeLabel.backgroundColor = [UIColor clearColor];
-        _closeLabel.font = HEI_(18);
+        _closeLabel.font = HEI_(20);
         _closeLabel.textColor = [UIColor whiteColor];
         _closeLabel.text = @"收盘价";
         [self addSubview:_closeLabel];

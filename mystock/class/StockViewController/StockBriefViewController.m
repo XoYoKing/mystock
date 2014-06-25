@@ -30,6 +30,7 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = BACKGROUND_COLOR;
+    self.navigationController.navigationBar.barTintColor = NAVI_COLOR;
     
     NSString *codeStr = [_stockDic objForKey:@"code"];
     

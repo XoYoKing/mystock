@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SuggestDetailViewController.h"
 
 @interface MainViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
@@ -18,5 +19,7 @@
 @property (nonatomic, strong) UIToolbar *toolBar;
 
 @property (nonatomic, strong) UITableView *sTableView;
+
+@property (nonatomic, strong) SuggestDetailViewController *sDetailVC;
 
 @end

@@ -22,14 +22,14 @@
         _nameLabel.font = HEI_(18);
         _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.text = @"鸿博股份";
-        [self addSubview:_nameLabel];
+        [self.contentView addSubview:_nameLabel];
         
         self.codeLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 33, 160, 12)];
         _codeLabel.backgroundColor = [UIColor clearColor];
         _codeLabel.font = HEI_(10);
         _codeLabel.textColor = [UIColor lightGrayColor];
         _codeLabel.text = @"002229";
-        [self addSubview:_codeLabel];
+        [self.contentView addSubview:_codeLabel];
         
         UIView *tempView = [[UIView alloc] initWithFrame:self.bounds];
         tempView.backgroundColor = NAVI_COLOR;

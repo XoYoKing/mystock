@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StockLineView.h"
 
 @interface SuggestDetailViewController : UIViewController
+
+@property (nonatomic, strong) NSDictionary *stockDic;
+@property (nonatomic, strong) NSArray *downArray;
+
+@property (nonatomic, strong) UISegmentedControl *segmentedControl;
+@property (nonatomic, strong) UIImageView *imageView;
+
+@property (nonatomic, strong) StockLineView *stockLineView;
+
+- (id)initWithStock:(NSDictionary *)dic;
 
 @end

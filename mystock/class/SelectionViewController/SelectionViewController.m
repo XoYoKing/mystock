@@ -116,6 +116,8 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
         NSDictionary *tempDic = [kSArray objectAtIndex:indexPath.row];
         
         NSMutableDictionary *sendDataDict = [NSMutableDictionary dictionary];
@@ -152,7 +154,7 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
                         
                         [historyArray writeToFile:SEARCH_FILEPATH atomically:YES];
                     }
-                    
+                    [MBProgressHUD hideHUDForView:self.view animated:NO];
                     MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
                     [self.view addSubview:hud];
                     
@@ -170,6 +172,7 @@ NSString * const SelectCellReuseIdentifier = @"SelectCell";
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             DMLog(@"Error: %@", error);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
 
     }

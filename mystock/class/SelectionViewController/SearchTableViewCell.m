@@ -23,19 +23,19 @@
         _nameLabel.font = HEI_(18);
         _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.text = @"鸿博股份";
-        [self addSubview:_nameLabel];
+        [self.contentView addSubview:_nameLabel];
         
         self.codeLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 33, 160, 12)];
         _codeLabel.backgroundColor = [UIColor clearColor];
         _codeLabel.font = HEI_(10);
         _codeLabel.textColor = [UIColor lightGrayColor];
         _codeLabel.text = @"002229";
-        [self addSubview:_codeLabel];
+        [self.contentView addSubview:_codeLabel];
         
         self.addBtn = [UIButton buttonWithType:UIButtonTypeContactAdd];
         _addBtn.frame = CGRectMake(280, 15, 20, 20);
         [_addBtn addTarget:self action:@selector(addFocus) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_addBtn];
+        [self.contentView addSubview:_addBtn];
         
         self.addLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 100, 50)];
         _addLabel.backgroundColor = [UIColor clearColor];
@@ -43,7 +43,7 @@
         _addLabel.textColor = BLUE_COLOR;
         _addLabel.textAlignment = NSTextAlignmentRight;
         _addLabel.text = @"已添加";
-        [self addSubview:_addLabel];
+        [self.contentView addSubview:_addLabel];
         _addLabel.hidden = YES;
         
         UIView *tempView = [[UIView alloc] initWithFrame:self.bounds];
